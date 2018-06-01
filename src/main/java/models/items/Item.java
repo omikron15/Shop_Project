@@ -1,6 +1,7 @@
 package models.items;
 
 import db.DBHelper;
+import models.Order;
 import models.OrderQuantity;
 
 
@@ -129,6 +130,10 @@ public abstract class Item {
 
         }
         return allItemClasses;
+    }
+
+    public Integer returnNumberOfItemInOrder(Order order){
+        return DBHelper.showQuantityOfItemInOrder(order, this);
     }
 
 }

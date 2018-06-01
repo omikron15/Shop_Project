@@ -10,17 +10,17 @@ import java.util.List;
 public class Seeds {
 
     public static void seedData(){
-        Customer customer1 = new Customer("David Swan", "Swanny", "password 123", 100.00);
-        Customer customer2 = new Customer("Harry Goose", "Goosey", "password ABC", 200.00);
-        Customer customer3 = new Customer("Sasha Buzzard", "Buzzy", "password XYZ", 300.00);
-
+        Customer customer1 = new Customer("Connor", "CRUSER", "CRPASS", 1000.00);
+//        Customer customer2 = new Customer("Harry Goose", "Goosey", "password ABC", 200.00);
+//        Customer customer3 = new Customer("Sasha Buzzard", "Buzzy", "password XYZ", 300.00);
+//
         DBHelper.save(customer1);
-        DBHelper.save(customer2);
-        DBHelper.save(customer3);
-
+//        DBHelper.save(customer2);
+//        DBHelper.save(customer3);
+//
         Order order1 = new Order("01/02/04", customer1);
-
-        DBHelper.save(order1);
+//
+//        DBHelper.save(order1);
 
         String pictureLink = "https://images.pexels.com/photos/262333/pexels-photo-262333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
 
@@ -35,8 +35,10 @@ public class Seeds {
         DBHelper.save(electronics2);
 
         DBHelper.addItemToOrder(clothing1, order1, 4);
-        DBHelper.addItemToOrder(food1, order1, 5);
-        DBHelper.addItemToOrder(electronics1, order1, 2);
+//        DBHelper.addItemToOrder(food1, order1, 5);
+//        DBHelper.addItemToOrder(electronics1, order1, 2);
+
+        Integer test = clothing1.returnNumberOfItemInOrder(order1);
 
 
 //        List<OrderQuantity> orderOneOrderQuantites = DBHelper.listAllOrderQuantitiesForOrder(order1);

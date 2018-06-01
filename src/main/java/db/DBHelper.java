@@ -1,5 +1,6 @@
 package db;
 
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import models.Customer;
 import models.Order;
 import models.OrderQuantity;
@@ -167,6 +168,19 @@ public class DBHelper {
             }
         }
         return order;
+    }
+
+    public static Integer showQuantityOfItemInOrder(Order order, Item item){
+        List<OrderQuantity> orderQuantities = listAllOrderQuantitiesForOrder(order);
+
+        for (OrderQuantity orderQuantity : orderQuantities){
+            if(orderQuantity.getItem().getId() == item.getId() ){
+                return orderQuantity.getQuantity();
+            }
+        }
+
+        return null;
+
     }
 
 }

@@ -7,6 +7,10 @@ import spark.Request;
 import spark.Response;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import static spark.Spark.post;
@@ -22,10 +26,14 @@ public class LoginController {
         post("/login/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
             Customer user = DBHelper.find(id, Customer.class);
-//            req.session().attribute("currentUserId", user.getId());
-//            req.session().attribute("currentUsername", user.getName());
-//            req.session().attribute("currentUserUsername", user.getUsername());
-//            req.session().attribute("currentUserPassword", user.getPassword());
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String currentDate = dateFormat.format(date);
+
+            Order newOrder = new Order(currentDate, user);
+            DBHelper.save(newOrder);
+
             req.session().attribute("currentCustomer", user);
             res.redirect("/");
             return null;
@@ -33,19 +41,10 @@ public class LoginController {
     }
 
     public static boolean isLoggedIn(Request req, Response res){
-
-
         if( req.session().attribute("currentCustomer") == (null)){
             return false;
         }
         return true;
-//        Customer customer = getLoggedInCustomer(req, res);
-//        String user = customer.getUsername();
-//        if(user == null || user == ""){
-//            return false;
-//        } else {
-//            return true;
-//        }
     }
 
     public static Customer getLoggedInCustomer(Request req, Response res) {
@@ -53,26 +52,6 @@ public class LoginController {
         int id = customer.getId();
         return DBHelper.find(id, Customer.class);
     }
-
-//    public static int getLoggedInUserId(Request req, Response res) {
-//        int id = req.session().attribute("currentUserId");
-//        return id;
-//    }
-//
-//    public static String getLoggedInName(Request req, Response res) {
-//        String name = req.session().attribute("currentUsername");
-//        return name;
-//    }
-//
-//    public static String getLoggedInUsername(Request req, Response res) {
-//        String username = req.session().attribute("currentUserUsername");
-//        return username;
-//    }
-//
-//    public static String getLoggedInPassword(Request req, Response res) {
-//        String password = req.session().attribute("currentUserPassword");
-//        return password;
-//    }
 
     public static void setupLoginInfo(Map<String, Object> model, Request req, Response res){
 
@@ -83,8 +62,5 @@ public class LoginController {
         }
         model.put("isLoggedIn", isLoggedIn);
     }
-
-
-
 
 }

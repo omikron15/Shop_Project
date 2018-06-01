@@ -103,7 +103,6 @@ public class Order {
         this.orderQuantity.add(orderQuantity);
     }
 
-
     public int totalItemsInOrder(){
 
         int total = 0;
