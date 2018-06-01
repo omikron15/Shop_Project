@@ -99,6 +99,14 @@ public abstract class Item {
         this.itemStock = itemStock;
     }
 
+    public void increaseStock(int stockValue){
+        this.itemStock += stockValue;
+    }
+
+    public void decreaseStock(int stockValue){
+        this.itemStock -= stockValue;
+    }
+
     public void addOrderQuantityEntry(OrderQuantity orderQuantity){
         this.orderQuantities.add(orderQuantity);
     }
