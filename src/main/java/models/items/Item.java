@@ -1,9 +1,8 @@
 package models.items;
 
 import db.DBHelper;
-import models.Order;
 import models.OrderQuantity;
-import models.ShopStock;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,16 +17,17 @@ public abstract class Item {
     private String name;
     private double price;
     private String description;
-    private ShopStock stock;
     private List<OrderQuantity> orderQuantities;
     private String pictureLink;
+    private int itemStock;
 
-    public Item(String name, double price, String description, String pictureLink) {
+    public Item(String name, double price, String description, String pictureLink, int itemStock) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.pictureLink = pictureLink;
         this.orderQuantities = new ArrayList<OrderQuantity>();
+        this.itemStock = itemStock;
     }
 
     public Item() {
@@ -71,14 +71,6 @@ public abstract class Item {
         this.description = description;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    public ShopStock getStock() {
-        return stock;
-    }
-
-    public void setStock(ShopStock stock) {
-        this.stock = stock;
-    }
 
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<OrderQuantity> getOrderQuantities() {
@@ -98,6 +90,14 @@ public abstract class Item {
         this.pictureLink = pictureLink;
     }
 
+    @Column(name = "item_stock")
+    public int getItemStock() {
+        return itemStock;
+    }
+
+    public void setItemStock(int itemStock) {
+        this.itemStock = itemStock;
+    }
 
     public void addOrderQuantityEntry(OrderQuantity orderQuantity){
         this.orderQuantities.add(orderQuantity);
@@ -122,13 +122,5 @@ public abstract class Item {
         }
         return allItemClasses;
     }
-
-    public int returnStockQuantity(){
-        return this.stock.getQuantity();
-    }
-
-
-
-
 
 }

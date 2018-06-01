@@ -3,7 +3,6 @@ package db;
 import models.Customer;
 import models.Order;
 import models.OrderQuantity;
-import models.ShopStock;
 import models.items.Item;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -104,14 +103,6 @@ public class DBHelper {
         order.updatePrice(item.getPrice(), quantity);
         save(order);
         save(item);
-    }
-
-    public static void addItemToStock(Item item, int quantity){
-        ShopStock newStock = new ShopStock(item, quantity);
-        save(newStock);
-        item.setStock(newStock);
-        save(item);
-
     }
 
     public static List<Item> listAllItemsForOrder(Order order){

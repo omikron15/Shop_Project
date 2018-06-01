@@ -14,8 +14,8 @@ public class Clothing extends Item {
 
     private Size size;
 
-    public Clothing(String name, double price, String description, Size size, String pictureLink) {
-        super(name, price, description, pictureLink );
+    public Clothing(String name, double price, String description, Size size, String pictureLink, int itemStock) {
+        super(name, price, description, pictureLink, itemStock );
         this.size = size;
     }
 

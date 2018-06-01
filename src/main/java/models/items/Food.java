@@ -10,8 +10,8 @@ public class Food extends Item {
 
     private String date;
 
-    public Food(String name, double price, String description, String date, String pictureLink) {
-        super(name, price, description, pictureLink);
+    public Food(String name, double price, String description, String date, String pictureLink, int itemStock) {
+        super(name, price, description, pictureLink, itemStock);
         this.date = date;
     }
 

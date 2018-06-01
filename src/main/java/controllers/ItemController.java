@@ -3,7 +3,6 @@ package controllers;
 import db.DBHelper;
 import models.Customer;
 import models.Order;
-import models.ShopStock;
 import models.items.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -68,11 +67,11 @@ public class ItemController {
             String strId = req.params(":id");
             Integer intId = Integer.parseInt(strId);
             Item item = DBHelper.find(intId, Item.class);
-            ShopStock stock = item.getStock();
-            int quantity = stock.getQuantity();
+//            ShopStock stock = item.getStock();
+//            int quantity = stock.getQuantity();
 
             model.put("item", item);
-            model.put("quantity", quantity);
+//            model.put("quantity", quantity);
             model.put("template", "templates/items/show.vtl");
 
             return new ModelAndView(model, "templates/layout.vtl");
@@ -135,10 +134,10 @@ public class ItemController {
                     break;
             }
 
-            ShopStock stock = item.getStock();
-            stock.setQuantity(quantity);
+//            ShopStock stock = item.getStock();
+//            stock.setQuantity(quantity);
 
-            DBHelper.save(stock);
+//            DBHelper.save(stock);
             DBHelper.save(item);
             res.redirect("/items");
             return null;
@@ -158,22 +157,19 @@ public class ItemController {
             switch (itemClass) {
                 case "Food":
                     String date = req.queryParams("date");
-                    Food newFood = new Food(name, price, description, date, pictureLink);
+                    Food newFood = new Food(name, price, description, date, pictureLink, quantity);
                     DBHelper.save(newFood);
-                    DBHelper.addItemToStock(newFood, quantity);
                     break;
                 case "Electronics":
                     String voltage = req.queryParams("voltage");
-                    Electronics newElectronic = new Electronics(name, price, description, voltage, pictureLink);
+                    Electronics newElectronic = new Electronics(name, price, description, voltage, pictureLink, quantity);
                     DBHelper.save(newElectronic);
-                    DBHelper.addItemToStock(newElectronic, quantity);
                     break;
                 case "Clothing":
                     String size = req.queryParams("size");
                     Size option = Size.valueOf(size);
-                    Clothing newClothing = new Clothing(name, price, description, option, pictureLink);
+                    Clothing newClothing = new Clothing(name, price, description, option, pictureLink, quantity);
                     DBHelper.save(newClothing);
-                    DBHelper.addItemToStock(newClothing, quantity);
                     break;
             }
 
