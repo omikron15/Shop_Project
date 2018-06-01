@@ -2,7 +2,7 @@
     <p> Name: $item.getName()</p>
     <p> Price: $item.getPrice()</p>
     <p> Description: $item.getDescription()</p>
-    <p> Quantity: $quantity</p>
+    <p> Quantity: $item.getItemStock()</p>
 
     #if($item.itemType() == "Clothing")
     <p>Size: $item.getSize() </p>
