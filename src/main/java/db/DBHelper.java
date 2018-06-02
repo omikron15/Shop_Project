@@ -1,6 +1,5 @@
 package db;
 
-import com.sun.tools.corba.se.idl.constExpr.Or;
 import models.Customer;
 import models.Order;
 import models.OrderQuantity;
@@ -13,6 +12,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DBHelper {
@@ -178,9 +178,7 @@ public class DBHelper {
                 return orderQuantity.getQuantity();
             }
         }
-
         return null;
-
     }
 
 }

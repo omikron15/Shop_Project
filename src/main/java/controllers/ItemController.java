@@ -49,7 +49,9 @@ public class ItemController {
             List<Electronics> electronics = DBHelper.getAll(Electronics.class);
             List<Food> foods = DBHelper.getAll(Food.class);
             List<String> type = Item.allItemTypes();
+            List<Item> items = DBHelper.getAll(Item.class);
 
+            model.put("items", items);
             model.put("itemType", type);
             model.put("clothing", clothing);
             model.put("foods", foods);

@@ -11,22 +11,42 @@
 </form>
 
 
-<div class=" container">
-    <p>Clothing</p>
+<div class="container">
+    #foreach($type in $itemType)
+    <p>$type</p>
     <table>
         <tr>
             <th>Name</th>
             <th>Price</th>
+            #if($type == "Clothing")
             <th>Size</th>
+            #end
+            #if($type == "Electronics")
+            <th>Voltage</th>
+            #end
+            #if($type == "Food")
+            <th>Best Before</th>
+            #end
             <th>Quantity Available</th>
             <th>Details</th>
             <th>Add to Order</th>
         </tr>
-        #foreach($item in $clothing)
+        #foreach($item in $items)
+            #if($item.itemType() == $type)
         <tr>
             <td>$item.getName()</td>
             <td>$item.getPrice()</td>
+
+            #if($type == "Clothing")
             <td>$item.getSize()</td>
+            #end
+            #if($type == "Electronics")
+            <td>$item.getVoltage()</td>
+            #end
+            #if($type == "Food")
+            <td>$item.getDate()</td>
+            #end
+
             <td>$item.getItemStock()</td>
             <td> <a href="/items/$item.getId()" class="button">View Details</a> </td>
             <td>
@@ -38,63 +58,99 @@
             </td>
         </tr>
         #end
-    </table>
-</div>
-
-<div class=" container">
-    <p>Electronics</p>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Voltage</th>
-            <th>Quantity Available</th>
-            <th>Details</th>
-            <th>Add to Order</th>
-        </tr>
-        #foreach($item in $electronics)
-        <tr>
-            <td>$item.getName()</td>
-            <td>$item.getPrice()</td>
-            <td>$item.getVoltage()</td>
-            <td>$item.getItemStock()</td>
-            <td> <a href="/items/$item.getId()" class="button">View Details</a> </td>
-            <td>
-                <input id="electronicQuantity" type="number">
-                <form action="/items/$item.getId()/addToOrder" method="post">
-                    <input type="submit" value="Add To Order" class="button">
-                </form>
-            </td>
-        </tr>
         #end
     </table>
+    #end
 </div>
 
-<div class=" container">
-    <p>Foods</p>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Best Before</th>
-            <th>Quantity Available</th>
-            <th>Details</th>
-            <th>Add to Order</th>
-        </tr>
-        #foreach($item in $foods)
-        <tr>
-            <td>$item.getName()</td>
-            <td>$item.getPrice()</td>
-            <td>$item.getDate()</td>
-            <td>$item.getItemStock()</td>
-            <td> <a href="/items/$item.getId()" class="button">View Details</a> </td>
-            <td>
-                <input id="foodQuantity" type="number">
-                <form action="/items/$item.getId()/addToOrder" method="post">
-                    <input type="submit" value="Add To Order" class="button">
-                </form>
-            </td>
-        </tr>
-        #end
-    </table>
-</div>
+
+<!--OLD CODE BELOW-->
+
+
+<!--<div class="container">-->
+    <!--<p>Clothing</p>-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>Name</th>-->
+            <!--<th>Price</th>-->
+            <!--<th>Size</th>-->
+            <!--<th>Quantity Available</th>-->
+            <!--<th>Details</th>-->
+            <!--<th>Add to Order</th>-->
+        <!--</tr>-->
+        <!--#foreach($item in $clothing)-->
+        <!--<tr>-->
+            <!--<td>$item.getName()</td>-->
+            <!--<td>$item.getPrice()</td>-->
+            <!--<td>$item.getSize()</td>-->
+            <!--<td>$item.getItemStock()</td>-->
+            <!--<td> <a href="/items/$item.getId()" class="button">View Details</a> </td>-->
+            <!--<td>-->
+
+                <!--<form action="/items/$item.getId()/addToOrder" method="post">-->
+                    <!--<input id="quantity" type="number" name ="quantity">-->
+                    <!--<input type="submit" value="Add To Order" class="button">-->
+                <!--</form>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--#end-->
+    <!--</table>-->
+<!--</div>-->
+
+<!--<div class=" container">-->
+    <!--<p>Electronics</p>-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>Name</th>-->
+            <!--<th>Price</th>-->
+            <!--<th>Voltage</th>-->
+            <!--<th>Quantity Available</th>-->
+            <!--<th>Details</th>-->
+            <!--<th>Add to Order</th>-->
+        <!--</tr>-->
+        <!--#foreach($item in $electronics)-->
+        <!--<tr>-->
+            <!--<td>$item.getName()</td>-->
+            <!--<td>$item.getPrice()</td>-->
+            <!--<td>$item.getVoltage()</td>-->
+            <!--<td>$item.getItemStock()</td>-->
+            <!--<td> <a href="/items/$item.getId()" class="button">View Details</a> </td>-->
+            <!--<td>-->
+                <!--<input id="electronicQuantity" type="number">-->
+                <!--<form action="/items/$item.getId()/addToOrder" method="post">-->
+                    <!--<input type="submit" value="Add To Order" class="button">-->
+                <!--</form>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--#end-->
+    <!--</table>-->
+<!--</div>-->
+
+<!--<div class=" container">-->
+    <!--<p>Foods</p>-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>Name</th>-->
+            <!--<th>Price</th>-->
+            <!--<th>Best Before</th>-->
+            <!--<th>Quantity Available</th>-->
+            <!--<th>Details</th>-->
+            <!--<th>Add to Order</th>-->
+        <!--</tr>-->
+        <!--#foreach($item in $foods)-->
+        <!--<tr>-->
+            <!--<td>$item.getName()</td>-->
+            <!--<td>$item.getPrice()</td>-->
+            <!--<td>$item.getDate()</td>-->
+            <!--<td>$item.getItemStock()</td>-->
+            <!--<td> <a href="/items/$item.getId()" class="button">View Details</a> </td>-->
+            <!--<td>-->
+                <!--<input id="foodQuantity" type="number">-->
+                <!--<form action="/items/$item.getId()/addToOrder" method="post">-->
+                    <!--<input type="submit" value="Add To Order" class="button">-->
+                <!--</form>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--#end-->
+    <!--</table>-->
+<!--</div>-->
