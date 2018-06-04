@@ -18,7 +18,7 @@ public class Seeds {
 //        DBHelper.save(customer2);
 //        DBHelper.save(customer3);
 //
-        Order order1 = new Order("01/02/04", customer1);
+//        Order order1 = new Order("01/02/04", customer1);
 //
 //        DBHelper.save(order1);
 
@@ -34,11 +34,11 @@ public class Seeds {
         DBHelper.save(electronics1);
         DBHelper.save(electronics2);
 
-        DBHelper.addItemToOrder(clothing1, order1, 4);
+//        DBHelper.addItemToOrder(clothing1, order1, 4);
 //        DBHelper.addItemToOrder(food1, order1, 5);
 //        DBHelper.addItemToOrder(electronics1, order1, 2);
 
-        Integer test = clothing1.returnNumberOfItemInOrder(order1);
+//        Integer test = clothing1.returnNumberOfItemInOrder(order1);
 
 
 //        List<OrderQuantity> orderOneOrderQuantites = DBHelper.listAllOrderQuantitiesForOrder(order1);

@@ -1,0 +1,17 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+col1, col2, col3, col4 , col5 {
+    width: 15%;
+}
+
+col6 {
+    width: 25%;
+}

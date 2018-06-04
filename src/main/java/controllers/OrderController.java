@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import models.Customer;
 import models.Order;
 import models.items.Item;
 import spark.ModelAndView;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class OrderController {
 
@@ -30,6 +32,21 @@ public class OrderController {
 
             model.put("template", "templates/orders/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/orders/complete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            LoginController.setupLoginInfo(model, req, res);
+
+            Customer customer = LoginController.getLoggedInCustomer(req, res);
+            int customerId = customer.getId();
+            Order basket = DBHelper.showCurrentOrder(customer);
+
+            basket.completeOrder();
+            DBHelper.save(basket);
+
+            res.redirect("/customers/"+ customerId );
+            return null;
         }, new VelocityTemplateEngine());
 
     }

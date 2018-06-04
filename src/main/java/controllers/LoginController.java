@@ -57,8 +57,8 @@ public class LoginController {
 
         boolean isLoggedIn = LoginController.isLoggedIn(req,res);
         if(isLoggedIn){
-            Customer loggedInCutomer = LoginController.getLoggedInCustomer(req, res);
-            model.put("user", loggedInCutomer);
+            Customer loggedInCustomer = LoginController.getLoggedInCustomer(req, res);
+            model.put("user", loggedInCustomer);
         }
         model.put("isLoggedIn", isLoggedIn);
     }

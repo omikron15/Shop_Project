@@ -113,4 +113,8 @@ public class Order {
         }
         return total;
     }
+
+    public void completeOrder(){
+        this.completeOrder = true;
+    }
 }

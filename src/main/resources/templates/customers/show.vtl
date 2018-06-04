@@ -37,6 +37,7 @@
                 <th>Show Details</th>
             </tr>
             #foreach($order in $orders)
+            #if($order.getCompleteOrder())
             <tr>
                 <td>$order.getTotalPrice()</td>
                 <td>$order.getCompleteOrder()</td>
@@ -44,7 +45,7 @@
                 <td>$order.totalItemsInOrder()</td>
                 <td><a href="/orders/$order.getId()" class = "button"> Show Details</a></td>
             </tr>
-
+            #end
             #end
         </table>
     </div>

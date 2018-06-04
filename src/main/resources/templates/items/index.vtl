@@ -16,40 +16,40 @@
     <p>$type</p>
     <table>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
+            <th class="col1">Name</th>
+            <th class="col2">Price</th>
             #if($type == "Clothing")
-            <th>Size</th>
+            <th class="col3">Size</th>
             #end
             #if($type == "Electronics")
-            <th>Voltage</th>
+            <th class="col3">Voltage</th>
             #end
             #if($type == "Food")
-            <th>Best Before</th>
+            <th class="col3">Best Before</th>
             #end
-            <th>Quantity Available</th>
-            <th>Details</th>
-            <th>Add to Order</th>
+            <th class="col4">Quantity Available</th>
+            <th class="col5">Details</th>
+            <th class="col6">Add to Order</th>
         </tr>
         #foreach($item in $items)
             #if($item.itemType() == $type)
         <tr>
-            <td>$item.getName()</td>
-            <td>$item.getPrice()</td>
+            <td class="col1">$item.getName()</td>
+            <td class="col2">$item.getPrice()</td>
 
             #if($type == "Clothing")
-            <td>$item.getSize()</td>
+            <td class="col3">$item.getSize()</td>
             #end
             #if($type == "Electronics")
-            <td>$item.getVoltage()</td>
+            <td class="col3">$item.getVoltage()</td>
             #end
             #if($type == "Food")
-            <td>$item.getDate()</td>
+            <td class="col3">$item.getDate()</td>
             #end
 
-            <td>$item.getItemStock()</td>
-            <td> <a href="/items/$item.getId()" class="button">View Details</a> </td>
-            <td>
+            <td class="col4">$item.getItemStock()</td>
+            <td class="col5"> <a href="/items/$item.getId()" class="button">View Details</a> </td>
+            <td class="col6">
 
                 <form action="/items/$item.getId()/addToOrder" method="post">
                     <input id="quantity" type="number" name ="quantity">
