@@ -27,7 +27,7 @@ public class Seeds {
         Clothing clothing1 = new Clothing("T-Shirt", 30.00, "White T-Shirt", Size.MEDIUM, pictureLink, 100);
         Food food1 = new Food("Tin of Tuna", 5.00, "Tasty Tuna!", "30/9/18", pictureLink, 100);
         Electronics electronics1 = new Electronics("Game Boy", 30.00, "Old school Game Boy", "V6", pictureLink, 50);
-        Electronics electronics2 = new Electronics("Game Boy", 30.00, "Old school Game Boy", "V6", pictureLink, 200);
+        Electronics electronics2 = new Electronics("Game Boy Advance", 30.00, "Old school Game Boy Advance", "V6", pictureLink, 200);
 
         DBHelper.save(clothing1);
         DBHelper.save(food1);
