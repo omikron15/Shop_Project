@@ -42,7 +42,7 @@
             #if($order.getCompleteOrder())
             <tr>
                 <td>$order.formatTotalPrice()</td>
-                <td>$order.getCompleteOrder()</td>
+                <td>$order.displayOrderStatus()</td>
                 <td>$order.getDate()</td>
                 <td>$order.totalItemsInOrder()</td>
                 <td><a href="/orders/$order.getId()" class = "button"> Show Details</a></td>
