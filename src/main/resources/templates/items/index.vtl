@@ -35,7 +35,7 @@
             #if($item.itemType() == $type)
         <tr>
             <td class="col1">$item.getName()</td>
-            <td class="col2">$item.getPrice()</td>
+            <td class="col2">$item.formatPrice()</td>
 
             #if($type == "Clothing")
             <td class="col3">$item.getSize()</td>
