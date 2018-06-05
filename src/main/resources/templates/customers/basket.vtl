@@ -11,7 +11,7 @@
     #foreach($item in $items)
     <tr>
         <td>$item.getName()</td>
-        <td>$item.getPrice()</td>
+        <td>$item.formatPrice()</td>
         <td>$item.getDescription()</td>
         <td>$item.returnNumberOfItemInOrder($basket)</td>
     </tr>

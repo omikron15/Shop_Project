@@ -1,17 +1,17 @@
 <p class = "pageHeader" >Customer</p>
 
-<div class = "container">
 
-    <table>
-        <td>
+
             <form action="/customers/$customer.getId()/delete" method="post">
                 <input type="submit" value="Delete" class="button">
             </form>
+
             <form action="/customer/$customer.getId()/edit" mrthod="post">
                 <input type="submit" value="Edit" class="button">
             </form>
-        </td>
 
+<div class = "container">
+    <table>
         <tr>
             <th>Name</th>
             <th>Username</th>
@@ -27,6 +27,8 @@
         </tr>
     </table>
 
+    <p>Order History</p>
+
     <div>
         <table>
             <tr>
@@ -39,7 +41,7 @@
             #foreach($order in $orders)
             #if($order.getCompleteOrder())
             <tr>
-                <td>$order.getTotalPrice()</td>
+                <td>$order.formatTotalPrice()</td>
                 <td>$order.getCompleteOrder()</td>
                 <td>$order.getDate()</td>
                 <td>$order.totalItemsInOrder()</td>

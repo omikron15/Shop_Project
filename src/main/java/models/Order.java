@@ -121,4 +121,11 @@ public class Order {
     public String formatTotalPrice(){
         return String.format ("£%.2f", this.getTotalPrice());
     }
+
+    public String displayOrderStatus(){
+        if(this.completeOrder){
+            return "Order Completed";
+        }
+        return "Order not Completed";
+    }
 }
