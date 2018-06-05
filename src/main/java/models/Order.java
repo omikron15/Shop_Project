@@ -117,4 +117,8 @@ public class Order {
     public void completeOrder(){
         this.completeOrder = true;
     }
+
+    public String formatTotalPrice(){
+        return String.format ("£%.2f", this.getTotalPrice());
+    }
 }

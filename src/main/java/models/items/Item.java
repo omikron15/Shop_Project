@@ -138,6 +138,5 @@ public abstract class Item {
 
     public String formatPrice(){
         return String.format ("£%.2f", this.getPrice());
-
     }
 }
