@@ -136,4 +136,8 @@ public abstract class Item {
         return DBHelper.showQuantityOfItemInOrder(order, this);
     }
 
+//    METHOD NOT FINISHED
+    public String formatPrice(){
+        return "£" + this.getPrice();
+    }
 }
