@@ -7,6 +7,9 @@ import models.items.Item;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +47,13 @@ public class OrderController {
 
             basket.completeOrder();
             DBHelper.save(basket);
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String currentDate = dateFormat.format(date);
+
+            Order newBasket = new Order(currentDate, customer);
+            DBHelper.save(newBasket);
 
             res.redirect("/customers/"+ customerId );
             return null;
