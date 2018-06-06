@@ -72,6 +72,7 @@ public class DBHelper {
         try {
             Criteria cr = session.createCriteria(classType);
             cr.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+            cr.addOrder(org.hibernate.criterion.Order.asc("id"));
             results = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();

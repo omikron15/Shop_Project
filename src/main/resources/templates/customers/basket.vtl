@@ -4,19 +4,24 @@
 
     <tr>
         <th>Name</th>
-        <th>Price</th>
         <th>Description</th>
+        <th>Price</th>
         <th>Quantity</th>
+        <th>Items Total </th>
     </tr>
     #foreach($item in $items)
     <tr>
         <td>$item.getName()</td>
-        <td>$item.formatPrice()</td>
         <td>$item.getDescription()</td>
+        <td>$item.formatPrice()</td>
         <td>$item.returnNumberOfItemInOrder($basket)</td>
+        <td>$item.returnItemTimesQuantityInOrder($basket)</td>
     </tr>
     #end
 </table>
+
+<p>Order Total (Before Discount)</p>
+<p>$basket.formatTotalPrice()</p>
 
 <form action="/orders/complete" method="post">
 <div></div>

@@ -7,6 +7,7 @@ import models.OrderQuantity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -129,6 +130,7 @@ public abstract class Item {
             }
 
         }
+        Collections.sort(allItemClasses);
         return allItemClasses;
     }
 
@@ -138,5 +140,10 @@ public abstract class Item {
 
     public String formatPrice(){
         return String.format ("£%.2f", this.getPrice());
+    }
+
+    public String returnItemTimesQuantityInOrder(Order order){
+        double total = returnNumberOfItemInOrder(order) * this.getPrice();
+        return String.format("£%.2f", total);
     }
 }
