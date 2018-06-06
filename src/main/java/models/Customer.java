@@ -104,4 +104,13 @@ public class Customer {
         this.money += value;
     }
 
+    public boolean canAfford(double price){
+
+        if(this.money >= price){
+            return true;
+        }
+        return false;
+
+    }
+
 }
