@@ -113,4 +113,8 @@ public class Customer {
 
     }
 
+    public void reduceMoney(double money){
+        this.money -= money;
+    }
+
 }

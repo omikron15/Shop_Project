@@ -45,7 +45,7 @@ public class OrderController {
             int customerId = customer.getId();
             Order basket = DBHelper.showCurrentOrder(customer);
 
-            basket.completeOrder();
+            basket.completeOrder(customer);
             DBHelper.save(basket);
 
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
