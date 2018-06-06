@@ -114,8 +114,11 @@ public class Order {
         return total;
     }
 
-    public void completeOrder(){
-        this.completeOrder = true;
+    public void completeOrder(Customer customer){
+        if(customer.canAfford(getTotalPrice())) {
+            this.completeOrder = true;
+        }
+
     }
 
     public String formatTotalPrice(){
