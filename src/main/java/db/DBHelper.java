@@ -98,17 +98,38 @@ public class DBHelper {
     }
 
     public static void addItemToOrder(Item item, Order order, int quantity){
-        OrderQuantity newOrderQuantity = new OrderQuantity(order, item, quantity);
-        save(newOrderQuantity);
-        item.addOrderQuantityEntry(newOrderQuantity);
-        order.addOrderQuantityToOrderQuantity(newOrderQuantity);
-        order.updatePrice(item.getPrice(), quantity);
-        save(order);
-        save(item);
+        if(itemIsAlreadyInOrder(item, order)){
+            OrderQuantity orderQuantity = showOrderQuantityforItemInOrder(item, order);
+            int oldQuantity = orderQuantity.getQuantity();
+            int newQuantity = oldQuantity + quantity;
+            orderQuantity.setQuantity(newQuantity);
+            save(orderQuantity);
+        }else {
+            OrderQuantity newOrderQuantity = new OrderQuantity(order, item, quantity);
+            save(newOrderQuantity);
+            item.addOrderQuantityEntry(newOrderQuantity);
+            order.addOrderQuantityToOrderQuantity(newOrderQuantity);
+            order.updatePrice(item.getPrice(), quantity);
+            save(order);
+            save(item);
+        }
+
+    }
+
+    public static OrderQuantity showOrderQuantityforItemInOrder(Item item, Order order){
+        List<OrderQuantity> orderQuantities = listAllOrderQuantitiesForOrder(order);
+
+        for(OrderQuantity orderQuantity : orderQuantities){
+            if(orderQuantity.getItem().getId() == item.getId()){
+                return orderQuantity;
+            }
+        }
+
+        return null;
     }
 
     public static List<Item> listAllItemsForOrder(Order order){
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
 
         List<OrderQuantity> quantities = listAllOrderQuantitiesForOrder(order);
 
@@ -180,6 +201,18 @@ public class DBHelper {
             }
         }
         return null;
+    }
+
+    public static boolean itemIsAlreadyInOrder(Item item, Order order){
+
+        List<OrderQuantity> orderQuantities = listAllOrderQuantitiesForOrder(order);
+
+        for(OrderQuantity eachEntry: orderQuantities){
+            if(eachEntry.getItem().getId() == item.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
