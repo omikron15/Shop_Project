@@ -4,6 +4,9 @@ package models;
 import db.DBHelper;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -115,8 +118,19 @@ public class Order {
     }
 
     public void completeOrder(Customer customer){
-        if(customer.canAfford(getTotalPrice())) {
+        if(customer.canAfford(getTotalPrice()) && (totalItemsInOrder() > 0)) {
+//Will need to modify if statement to include condition for stock being available
+            customer.reduceCustomerCash(getTotalPrice());
             this.completeOrder = true;
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String currentDate = dateFormat.format(date);
+            Order newBasket = new Order(currentDate, customer);
+
+            DBHelper.save(newBasket);
+            DBHelper.save(customer);
+            DBHelper.save(this);
         }
 
     }

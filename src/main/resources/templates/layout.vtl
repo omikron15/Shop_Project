@@ -13,6 +13,7 @@
     #if($isLoggedIn)
     <p>Logged in Customer: $user.getUsername() ($user.getName())</p>
     <a href="/customers/$user.getId()/order" class="button center">Basket</a>
+    <p>Basket Total: $basket.formatTotalPrice()</p>
 
     #else
     <p>No User is logged in</p>

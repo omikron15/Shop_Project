@@ -46,14 +46,6 @@ public class OrderController {
             Order basket = DBHelper.showCurrentOrder(customer);
 
             basket.completeOrder(customer);
-            DBHelper.save(basket);
-
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = new Date();
-            String currentDate = dateFormat.format(date);
-
-            Order newBasket = new Order(currentDate, customer);
-            DBHelper.save(newBasket);
 
             res.redirect("/customers/"+ customerId );
             return null;

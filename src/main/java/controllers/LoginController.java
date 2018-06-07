@@ -58,7 +58,9 @@ public class LoginController {
         boolean isLoggedIn = LoginController.isLoggedIn(req,res);
         if(isLoggedIn){
             Customer loggedInCustomer = LoginController.getLoggedInCustomer(req, res);
+            Order basket = DBHelper.showCurrentOrder(loggedInCustomer);
             model.put("user", loggedInCustomer);
+            model.put("basket", basket);
         }
         model.put("isLoggedIn", isLoggedIn);
     }
