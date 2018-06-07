@@ -2,6 +2,7 @@ package models;
 
 
 import db.DBHelper;
+import models.items.Item;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -121,6 +122,7 @@ public class Order {
         if(customer.canAfford(getTotalPrice()) && (totalItemsInOrder() > 0)) {
 //Will need to modify if statement to include condition for stock being available
             customer.reduceCustomerCash(getTotalPrice());
+            updateStockTotals();
             this.completeOrder = true;
 
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -145,4 +147,35 @@ public class Order {
         }
         return "Order not Completed";
     }
+
+    public void updateStockTotals(){
+
+        List<OrderQuantity> quantities = DBHelper.listAllOrderQuantitiesForOrder(this);
+
+        for(OrderQuantity eachItem : quantities){
+            Item item = eachItem.getItem();
+            int quantity = eachItem.getQuantity();
+            item.decreaseStock(quantity);
+            DBHelper.save(item);
+        }
+
+    }
+
+    public boolean hasEnoughStockForOrder(){
+
+        List<OrderQuantity> quantities = DBHelper.listAllOrderQuantitiesForOrder(this);
+
+        for(OrderQuantity eachItem : quantities){
+            int itemStock = eachItem.getItem().getItemStock();
+            int requiredQuantity = eachItem.getQuantity();
+
+            if(requiredQuantity > itemStock){
+                return false;
+            }
+        }
+        return true;
+
+
+    }
+
 }
