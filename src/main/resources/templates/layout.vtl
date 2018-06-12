@@ -3,21 +3,43 @@
 <head>
     <title>Online Shop Application Java</title>
     <link rel="stylesheet" href="/style.css" type="text/css">
-    <a href="/">Home</a>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    #if($isLoggedIn)
-    <p>Logged in Customer: $user.getUsername() ($user.getName())</p>
-    <a href="/customers/$user.getId()/order" class="button center">Basket</a>
-    <p>Basket Total: $basket.formatTotalPrice()</p>
+    <div class = "top-bar">
+        <div class = "top-bar-user">
 
-    #else
-    <p>No User is logged in</p>
-    #end
+            #if($isLoggedIn)
+            <p>Logged in Customer: $user.getUsername() ($user.getName())</p>
+            #else
+            <p>No User is logged in</p>
+            <a href="/customers/new" class="button center">Register</a>
+            #end
+
+        </div>
+
+        <div class = "top-bar-nav">
+
+                <a href="/" class="nav-button">Home</a>
+                <a href="/customers" class="nav-button">Customers</a>
+                <!--<a href="/orders" class="nav-button">Orders</a>-->
+                <a href="/items" class="nav-button">Items</a>
+
+        </div>
+
+        <div class = "top-bar-basket">
+            #if($isLoggedIn)
+            <p>Basket Total: $basket.formatTotalPrice()</p>
+            <a href="/customers/$user.getId()/order" class="button center">Basket</a>
+            #end
+        </div>
+    </div>
+
+
+
 
 </head>
 <body>
