@@ -103,7 +103,9 @@ public class DBHelper {
             int oldQuantity = orderQuantity.getQuantity();
             int newQuantity = oldQuantity + quantity;
             orderQuantity.setQuantity(newQuantity);
+            order.updatePrice(item.getPrice(), quantity);
             save(orderQuantity);
+            save(order);
         }else {
             OrderQuantity newOrderQuantity = new OrderQuantity(order, item, quantity);
             save(newOrderQuantity);
@@ -169,6 +171,8 @@ public class DBHelper {
         try {
             Criteria criteria = session.createCriteria(Order.class);
             criteria.add(Restrictions.eq("customer", customer));
+//            added by Ally to fix loop problem
+            criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
             results = criteria.list();
         } catch (HibernateException e) {
             e.printStackTrace();

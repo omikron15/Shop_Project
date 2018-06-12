@@ -73,7 +73,7 @@ public abstract class Item {
         this.description = description;
     }
 
-
+//  Fetch type changed from EAGER to LAZY
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<OrderQuantity> getOrderQuantities() {
         return orderQuantities;

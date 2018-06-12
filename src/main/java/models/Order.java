@@ -119,8 +119,7 @@ public class Order {
     }
 
     public void completeOrder(Customer customer){
-        if(customer.canAfford(getTotalPrice()) && (totalItemsInOrder() > 0)) {
-//Will need to modify if statement to include condition for stock being available
+        if(customer.canAfford(getTotalPrice()) && (totalItemsInOrder() > 0) &&(hasEnoughStockForOrder())) {
             customer.reduceCustomerCash(getTotalPrice());
             updateStockTotals();
             this.completeOrder = true;
