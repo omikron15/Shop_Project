@@ -1,0 +1,46 @@
+<div class = "container">
+
+    #foreach($type in $itemType)
+    <p>$type</p>
+    <table>
+        <tr>
+            <th class="col1">Name</th>
+            <th class="col2">Price per Item</th>
+            #if($type == "Clothing")
+            <th class="col3">Size</th>
+            #end
+            #if($type == "Electronics")
+            <th class="col3">Voltage</th>
+            #end
+            #if($type == "Food")
+            <th class="col3">Best Before</th>
+            #end
+            <th class="col4">Quantity</th>
+            <th class="col5">Details</th>
+        </tr>
+        #foreach($item in $items)
+        #if($item.itemType() == $type)
+        <tr>
+            <td class="col1">$item.getName()</td>
+            <td class="col2">$item.formatPrice()</td>
+
+            #if($type == "Clothing")
+            <td class="col3">$item.getSize()</td>
+            #end
+            #if($type == "Electronics")
+            <td class="col3">$item.getVoltage()</td>
+            #end
+            #if($type == "Food")
+            <td class="col3">$item.getDate()</td>
+            #end
+            <td class="col4">$item.returnNumberOfItemInOrder($order)</td>
+            <!--<td class="col4">$item.getItemStock()</td>-->
+            <td class="col5"> <a href="/items/$item.getId()" class="button">View Details</a> </td>
+
+        </tr>
+        #end
+        #end
+    </table>
+    #end
+
+</div>

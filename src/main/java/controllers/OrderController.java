@@ -51,5 +51,23 @@ public class OrderController {
             return null;
         }, new VelocityTemplateEngine());
 
+        get("/orders/:id", (req,res) -> {
+            Map<String, Object> model = new HashMap<>();
+            LoginController.setupLoginInfo(model, req, res);
+
+            int id = Integer.parseInt(req.params(":id"));
+            Order order = DBHelper.find(id, Order.class);
+
+            List<Item> items = DBHelper.listAllItemsForOrder(order);
+
+            List<String> itemTypes = Item.allItemTypes();
+
+            model.put("itemType", itemTypes);
+            model.put("items", items);
+            model.put("order", order);
+            model.put("template", "templates/orders/show.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
     }
 }
