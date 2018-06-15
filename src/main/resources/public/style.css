@@ -12,3 +12,13 @@ table, th, td {
     width: 16.5%;
 }
 
+body{
+    background-color: #778899;
+}
+
+#item-picture{
+    width: 300px;
+    height: 300px;
+
+}
+

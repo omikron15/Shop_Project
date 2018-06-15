@@ -22,12 +22,12 @@ public class Seeds {
 //
 //        DBHelper.save(order1);
 
-        String pictureLink = "https://images.pexels.com/photos/262333/pexels-photo-262333.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+        String pictureLink = "https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350";
 
-        Clothing clothing1 = new Clothing("T-Shirt", 30.00, "White T-Shirt", Size.MEDIUM, pictureLink, 100);
-        Food food1 = new Food("Tin of Tuna", 5.00, "Tasty Tuna!", "30/9/18", pictureLink, 100);
+        Clothing clothing1 = new Clothing("T-Shirt", 15.00, "White T-Shirt", Size.MEDIUM, pictureLink, 100);
+        Food food1 = new Food("Tin of Tuna", 1.00, "Tasty Tuna!", "30/9/18", pictureLink, 100);
         Electronics electronics1 = new Electronics("Game Boy", 30.00, "Old school Game Boy", "V6", pictureLink, 50);
-        Electronics electronics2 = new Electronics("Game Boy Advance", 30.00, "Old school Game Boy Advance", "V6", pictureLink, 200);
+        Electronics electronics2 = new Electronics("Game Boy Advanced", 50.00, "Old school Game Boy Advance", "V6", pictureLink, 200);
 
         DBHelper.save(clothing1);
         DBHelper.save(food1);
