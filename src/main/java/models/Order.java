@@ -91,8 +91,12 @@ public class Order {
         this.orderQuantity = orderQuantity;
     }
 
-    public void updatePrice(double price, int quantity){
+    public void updatePriceAdd(double price, int quantity){
         this.totalPrice += (price * quantity);
+    }
+
+    public void updatePriceRemove(double price, int quantity){
+        this.totalPrice -= (price * quantity);
     }
 
     public void changeOrderStatusToFalse(){

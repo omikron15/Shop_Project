@@ -8,6 +8,7 @@
         <th>Price</th>
         <th>Quantity</th>
         <th>Items Total </th>
+        <th>Remove Item</th>
     </tr>
     #foreach($item in $items)
     <tr>
@@ -16,6 +17,11 @@
         <td>$item.formatPrice()</td>
         <td>$item.returnNumberOfItemInOrder($basket)</td>
         <td>$item.returnItemTimesQuantityInOrder($basket)</td>
+        <td>
+            <form action="/orders/remove/$item.getId()" method="post">
+                <input type="submit" value="Remove Item" class="button">
+            </form>
+        </td>
     </tr>
     #end
 </table>
@@ -24,7 +30,5 @@
 <p>$basket.formatTotalPrice()</p>
 
 <form action="/orders/complete" method="post">
-<div></div>
 <input type="submit" value="Complete Order" class="button">
-<div></div>
 </form>

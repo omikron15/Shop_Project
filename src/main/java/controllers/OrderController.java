@@ -3,6 +3,7 @@ package controllers;
 import db.DBHelper;
 import models.Customer;
 import models.Order;
+import models.OrderQuantity;
 import models.items.Item;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -37,6 +38,24 @@ public class OrderController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        post("/orders/remove/:id", (req, res) -> {
+
+            Customer customer = LoginController.getLoggedInCustomer(req, res);
+            int customerId = customer.getId();
+            Order basket = DBHelper.showCurrentOrder(customer);
+            int basketId = basket.getId();
+            int itemId = Integer.parseInt(req.params(":id"));
+            Item item = DBHelper.find(itemId, Item.class);
+
+            OrderQuantity orderEntry =  DBHelper.showOrderQuantityforItemInOrder(item, basket);
+            DBHelper.delete(orderEntry);
+            basket.updatePriceRemove(item.getPrice(), orderEntry.getQuantity());
+            DBHelper.save(basket);
+
+            res.redirect("/customers/" + basketId + "/order");
+            return null;
+        }, new VelocityTemplateEngine());
+
         post("/orders/complete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             LoginController.setupLoginInfo(model, req, res);
@@ -50,6 +69,8 @@ public class OrderController {
             res.redirect("/customers/"+ customerId );
             return null;
         }, new VelocityTemplateEngine());
+
+
 
         get("/orders/:id", (req,res) -> {
             Map<String, Object> model = new HashMap<>();

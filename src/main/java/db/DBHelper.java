@@ -103,7 +103,7 @@ public class DBHelper {
             int oldQuantity = orderQuantity.getQuantity();
             int newQuantity = oldQuantity + quantity;
             orderQuantity.setQuantity(newQuantity);
-            order.updatePrice(item.getPrice(), quantity);
+            order.updatePriceAdd(item.getPrice(), quantity);
             save(orderQuantity);
             save(order);
         }else {
@@ -111,7 +111,7 @@ public class DBHelper {
             save(newOrderQuantity);
             item.addOrderQuantityEntry(newOrderQuantity);
             order.addOrderQuantityToOrderQuantity(newOrderQuantity);
-            order.updatePrice(item.getPrice(), quantity);
+            order.updatePriceAdd(item.getPrice(), quantity);
             save(order);
             save(item);
         }
